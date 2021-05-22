@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello React</title>
+</head>
+<body>
+  <div id="test"></div>
+  <script src="js/react.development.js"></script>
+  <script src="js/react-dom.development.js"></script>
+  <script src="js/babel.min.js"></script>
+  <script type="text/babel">
+    //创建虚拟DOM，JSX使创建虚拟DOM更简洁方便
+    const vDOM = <h1>Hello, React!</h1>
+    //js形式： const vDOM = React.createElement('h1', {id: test}, 'Hello, React!')  标签嵌套时不断使用createElement()，浏览器实际运行
+    ReactDOM.render(vDOM, document.getElementById("test"))
+    //console.log(vDOM); //Object
+  </script>
+</body>
+</html>

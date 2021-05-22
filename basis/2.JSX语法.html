@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script type="text/babel">
+  const con_id = 'title'
+  const con = 'Hello, React!'
+  const vDOM = (
+    <h1 id={con_id}>
+      <span style={{color:'red', fontSize: '28px'}}>{con}</span>
+    </h1>
+  )
+  ReactDOM.render(vDOM, document.getElementById("test"))
+  //1.在{}中嵌入js表达式，style={{key:value}}
+  //2.只有一个根标签，组件首字母大写
+</script>
+</body>
+</html>

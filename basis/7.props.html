@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+  class Person extends React.Component{
+    //static声明的静态方法通过类调用，而不是实例对象  =在类外部声明Person.propTypes = {...}
+    static propTypes = {
+      name: PropTypes.string.isRequired,
+      age: PropTypes.number,
+      sex: PropTypes.string
+    }
+    static defaultProps = {
+      age: 18,
+      sex: "无"
+    }
+
+    render(){
+      //props是只读的，不能被修改
+      const {name, age, sex} = this.props
+      return (
+        <ul>
+          <li>姓名：{name}</li>
+          <li>年龄：{age}</li>
+          <li>性别：{sex}</li>
+        </ul>
+      )
+    }
+  }
+  ReactDOM.render(<Person name="Tom" age={19} sex="男"/>, document.getElementById('test1')) //组件标签的所有属性放入了组件实例对象的props属性中：（对象形式）
+  const p = {name:"Alice", age:20}
+  ReactDOM.render(<Person {...p}/>, document.getElementById('test2'))
+</script>
+</body>
+</html>

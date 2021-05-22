@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+  function Person(props){ //props作为参数
+    const {name, age, sex} = props
+    return (
+      <ul>
+        <li>姓名：{name}</li>
+        <li>年龄：{age}</li>
+        <li>性别：{sex}</li>
+      </ul>
+    )
+  }
+  Person.propTypes = {
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number,
+    sex: PropTypes.string
+  }
+  Person.defaultProps = {
+    age: 18,
+    sex: "无"
+  }
+
+  ReactDOM.render(<Person name="Tom" age={19} sex="男"/>, document.getElementById('test1')) //放入了组件实例对象的props属性中
+  const p = {name:"Alice", age:20}
+  ReactDOM.render(<Person {...p}/>, document.getElementById('test2'))
+</script>
+</body>
+</html>

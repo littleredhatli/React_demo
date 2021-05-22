@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+  //过时API：String类型的Refs， 不建议使用：效率低？
+  //如果你目前还在使用 this.refs.textInput 这种方式访问 refs ，我们建议用回调函数或 createRef API 的方式代替
+  class Search extends React.Component{
+    showData = ()=>{
+      console.log(this.refs.input); //获取到ref标识的真实DOM
+      const {input} = this.refs
+      alert(input.value)
+    }
+    render(){
+      return (
+        <div>
+          <input ref="input" onBlur={this.showData} type="text"/>
+        </div>
+        //ref标识的DOM被收集到组件实例对象的refs属性中
+      )
+    }
+  }
+  ReactDOM.render(<Search/>, document.getElementById('test'));
+</script>
+</body>
+</html>

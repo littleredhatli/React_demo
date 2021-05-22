@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+  class Form1 extends React.Component{
+    handleSubmit = (e)=>{
+      e.preventDefault()
+      const {username, password} = this
+      alert(`用户名：${username.value}，密码：${password.value}`)  //非受控组件形式：现用现取
+    }
+    render(){
+      return (
+        <form onSubmit={this.handleSubmit}>
+          用户名：<input ref={e => this.username = e} name="username" type="text"/>
+          密码：<input ref={e => this.password = e} name="password" type="password"/>
+          <button>登录</button>
+        </form>
+      )
+    }
+  }
+  ReactDOM.render(<Form1/>, document.getElementById('test1'));
+
+  class Form2 extends React.Component{
+    handleFormData = (datatType, e)=>{ //或者通过函数柯里化的形式
+      this.setState({[datatType]: e.target.value})
+    }
+
+    // handleFormData = (datatType)=>{ //函数柯里化的形式
+    //   return (e)=>{
+    //     this.setState({[datatType]: e.target.value})
+    //   }
+    // }
+
+    handleSubmit = (e)=>{
+      e.preventDefault()
+      const {username, password} = this.state
+      alert(`用户名：${username}，密码：${password}`)  //受控组件形式：通过state进行管理
+    }
+    render(){
+      return (
+        <form onSubmit={this.handleSubmit}>
+          用户名：<input onChange={e => this.handleFormData('username', e)} name="username" type="text"/>
+          密码：<input onChange={e => this.handleFormData('password', e)} name="password" type="password"/>
+          <button>登录</button>
+        </form>
+      )
+    }
+  }
+  ReactDOM.render(<Form2/>, document.getElementById('test2'));
+</script>
+</body>
+</html>

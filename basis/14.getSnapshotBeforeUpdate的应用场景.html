@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .list{
+      height: 150px;
+      width: 200px;
+      border: 1px solid black;
+      overflow: scroll;
+    }
+    .msg{
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div id="test"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+  //getSnapshotBeforeUpdate() 在最近一次渲染输出（提交到 DOM 节点）之前调用。
+  //它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。此生命周期方法的任何返回值将作为参数传递给 componentDidUpdate()，应返回 snapshot 的值（或 null）。componentDidUpdate(prevProps, prevState, snapshot)
+
+  //此用法并不常见，但它可能出现在 UI 处理中，如需要以特殊方式处理滚动位置的聊天线程等。
+
+  class MsgList extends React.Component{
+    state = {listArr: []}
+
+    componentDidMount(){
+      setInterval(()=>{
+        const {listArr} = this.state
+        const msg = "消息" + (listArr.length+1)
+        this.setState({listArr: [msg, ...listArr]})
+      },1500)
+    }
+
+    getSnapshotBeforeUpdate(){
+      return this.refs.list.scrollHeight
+    }
+
+    componentDidUpdate(preProps, preState, snapshot){
+      this.refs.list.scrollTop += this.refs.list.scrollHeight - snapshot  //使滚动条可以固定在某个位置
+    }
+
+    render(){
+      return (
+        <div className="list" ref="list">
+          {
+            this.state.listArr.map((item, index) =>{
+              return <div className="msg" key={index}>{item}</div>
+            })
+          }
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(<MsgList/>, document.getElementById('test'));
+</script>
+</body>
+</html>

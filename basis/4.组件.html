@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+</head>
+<body>
+<div id="test_fun"></div>
+<div id="test_class"></div>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script type="text/babel">
+  //函数式组件
+  function Demo(){
+    //console.log(this); //undefined （严格模式）
+    return <h1>function</h1>
+  }
+  ReactDOM.render(<Demo/>, document.getElementById('test_fun'))
+  // React解析组件标签，找到Demo组件； 发现组件是使用函数定义的，随后调用该函数
+
+  //类式组件
+  class MyComponent extends React.Component{
+    render(){  //render是放在类的原型对象上，供实例使用
+      //console.log(this); //MyComponent{context:{}, props:{}, refs:{}, state:null, ...}
+      // this指向MyComponent组件实例对象
+      return <h1>class</h1>
+    }
+  }
+  ReactDOM.render(<MyComponent/>, document.getElementById('test_class'))
+  // React解析组件标签，找到MyComponent组件； 发现组件是使用类定义的，随后new该类的实例，通过该实例调用原型上的render(或其他)方法
+</script>
+</body>
+</html>
