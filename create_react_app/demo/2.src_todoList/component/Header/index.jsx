@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {nanoid} from 'nanoid';
 import "./index.css"
 
 export default class Header extends Component {
+    static propTypes = {
+        addTodo: PropTypes.func.isRequired
+    }
+
     handleInput = (event) => {
         if(event.keyCode !== 13) return;
         if(event.target.value.trim() == ''){
