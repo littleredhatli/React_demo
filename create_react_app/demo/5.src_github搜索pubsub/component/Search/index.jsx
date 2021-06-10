@@ -3,16 +3,15 @@ import axios from 'axios';
 import PubSub from 'pubsub-js'
 
 export default class Search extends Component {
-    handleSearch = async () => {
+    handleSearch = () => {
       const {keywordElement: {value: keyword}} = this;
       PubSub.publish('searchState', {isFirst: false, isLoading: true});
-      try{
-        const response = await fetch(`https://api.github.com/search/users?q=${keyword}`);
-        const data = await response.json();
-        PubSub.publish('searchState', {isLoading: false, users: data.items}); 
-      }catch(error){
-        PubSub.publish('searchState', {isLoading: false, err: error.message});
-      }  
+      axios.get(`https://api.github.com/search/users?q=${keyword}`).then(
+        response => {
+          PubSub.publish('searchState', {isLoading: false, users: response.data.items});
+        },
+        error => {PubSub.publish('searchState', {isLoading: false, err: error.message})}
+      );  
     }
 
     render() {
