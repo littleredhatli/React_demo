@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import store from '../../redux/store';
-import {increamentAction, decreamentAction} from '../../redux/count_action'
+import {increamentAction, decreamentAction, increamentAscynAction} from '../../redux/count_action'
 
 export default class Count extends Component {
     increament = ()=> {
@@ -23,9 +23,7 @@ export default class Count extends Component {
 
     increamentAscyn = ()=> {
         const add = this.selectValue.value;
-        setTimeout(()=> {
-            store.dispatch(increamentAction(add*1));
-        }, 500);
+        store.dispatch(increamentAscynAction(add*1, 500));
     }
 
     render() {
