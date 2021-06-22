@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Demo from './component/3_hooks'
+import A from './component/4_context'
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <Demo/>
+        <A/>
       </div>
     )
   }

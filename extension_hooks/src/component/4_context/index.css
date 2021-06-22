@@ -1,0 +1,15 @@
+.classA{
+	width: 500px;
+	background-color: orange;
+	padding: 8px;
+}
+.classB{
+	width: 100%;
+	background-color: skyblue;
+	padding: 8px;
+}
+.classC{
+	width: 100%;
+	background-color: gray;
+	padding: 8px;
+}
